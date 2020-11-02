@@ -1,0 +1,126 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Filedialog2
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+
+            {
+                StreamReader reader = new StreamReader(dlg.FileName, Encoding.Default);
+                textBox1.CharacterCasing = CharacterCasing.Lower;
+                textBox1.Text = reader.ReadToEnd();
+
+
+                reader.Close();
+
+            }
+            dlg.Dispose();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int total = 0;
+            string file = textBox1.Text;
+            Char[] vowels = { 'a', 'e', 'i', 'o', 'u', 'y' };
+            {
+                total++;
+            }
+
+            total = file.Count(c => vowels.Contains(c));
+            MessageBox.Show(" Total Vowels " + total++);
+
+
+            {
+                foreach (char vowel in vowels)
+                    file = string.Concat(file.Select(c => vowels.Contains(c) ? 'x' : c));
+
+
+
+            }
+        }
+
+
+
+
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            String allWords = textBox1.Text;
+            String[] wordsArray = allWords.Split(' ', '.', '(', '!');
+
+            foreach (string word in wordsArray)
+            {
+                if (!listBox1.Items.Contains(word))
+                {
+                    listBox1.Items.Add(word);
+                }
+                listBox1.Sorted = true;
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+
+        {
+            string line = textBox1.Text;
+            string[] words = line.Split(new[] { " " }, StringSplitOptions.None);
+            string word = "";
+            int ctr = 0;
+            foreach (String s in words)
+            {
+                if (s.Length > ctr)
+                {
+                    word = s;
+                    ctr = s.Length;
+                }
+            }
+            MessageBox.Show(word);
+        }
+
+    }
+
+            }
+            
+            
+        
+    
+
+
+           
+
+
+
+
+
+
